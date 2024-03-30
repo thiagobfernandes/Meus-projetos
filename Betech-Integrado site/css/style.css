@@ -1,0 +1,142 @@
+/* css reset */
+* {
+    /* retirar a margem externa */
+    margin: 0;
+    /* retirar a margem interna */
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+/* formatar o corpo */
+body {
+    font-family: Arial, Verdana;
+    font-size: 16px;
+    padding-top:100px;
+    /* comportamento do scroll */
+    
+
+
+}
+
+h2 {
+    /* centralizar */
+    text-align: center;
+    /* maiúsculo */
+    text-transform: uppercase;
+    /* tamanho da fonte */
+    font-size: 32px;
+}
+
+header {
+    /* cor de fundo */
+    background-color: #FFF;
+    /* largura */
+    width: 100%;
+    /* sombra */
+    box-shadow: 0 0 10px #CCC;
+    /*fixar  */
+    position: fixed;
+    /* posicionar topo */
+    top: 0;
+}
+
+header nav{
+    float: right;
+}
+ header nav ul {
+    /* retirar bola */
+    list-style: none;
+ }
+ header nav ul li {
+    /* alinhar um ao lado do outro */
+    display: inline-block;
+    /* espaçamento entre os elementos */
+    margin: 25px;
+    /* tamanho da fonte */
+    font-size: 20px;
+    /* transformar em maiusculo */
+    text-transform: uppercase;
+    /* negrito */
+    font-weight: bold;
+ }
+
+ header nav ul li a{
+    /* tirar sublinhado */
+    text-decoration: none;
+    color:#666;
+ }
+ header nav ul li a:hover{
+    color:#000;
+ }
+
+
+/* formatar a class chamada centro */
+.centro {
+    /* tamanho - largura */
+    width: 1000px;
+    /* centralizar */
+    margin: auto;
+}
+
+/* configuras o id mentores */
+#mentores {
+    background-color: #F1F1F1;
+}
+
+section {
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.grid{
+    /* Colocar imagens uma ao lado da outra */
+    display: grid;
+    /*  Configurar colunas*/
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.grid .coluna{
+    box-shadow: 0px 0px 10px #CCC;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.grid .coluna img{
+    width: 100%;
+    /* arredondar canto */
+    border-radius: 10px 10px 0px 0px;
+}
+
+.grid .coluna p, #mentores p{
+    margin: 15px;
+    text-align: center;
+}
+#mentores, #contato{
+    background-color: #F1F1F1;
+}
+input,textarea{
+    width: 100%;
+    border: 1px solid #CCC;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+button{
+    background-color: greenyellow;
+    padding: 10px;
+    border: 0;
+}
+footer{
+    background-color: black;
+    color: white;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
