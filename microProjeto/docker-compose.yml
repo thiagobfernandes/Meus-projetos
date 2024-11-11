@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=microservices
+      - MYSQL_USER=thiago
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_PASSWORD=123
+    ports:
+      - '3060:3306'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+    networks:
+      - viptech
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=thiagobfer
+      - RABBITMQ_DEFAULT_PASS=123
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - viptech
+
+networks:
+  viptech:
+    driver: bridge  # Default bridge network should be fine
+
+volumes:
+  mysql-volume:
+  rabbitmq_data:
