@@ -16,7 +16,7 @@ export class AuthenticationController {
 
   @Post('/create')
  async createuser(@Body() userData: CreateUserDTO) {
-    return await this.authenticationService.login(userData)
+    return await this.authenticationService.createUser(userData)
   }
   @Delete(':id')
   remove(@Param('id') id: string) {

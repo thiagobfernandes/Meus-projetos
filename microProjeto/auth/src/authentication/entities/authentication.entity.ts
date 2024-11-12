@@ -13,7 +13,7 @@ export class UserEntity {
     @Column({name:'password'})
     password:string
 
-    @Column({name:'token'})
+    @Column({name:'token', nullable:true, default:null})
     token:string
 
 }

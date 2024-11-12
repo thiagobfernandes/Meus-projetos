@@ -10,22 +10,27 @@ import { BcryptModule } from './shared/encrypter/Bcrypt.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
-  imports: [RestBaseModule,
+  imports: [
+    RestBaseModule,  // Ensure this is only imported once
     ConfigModule.forRoot({
       validate: (env) => envSchema.parse(env),
-      isGlobal:true,
+      isGlobal: true,  // Makes configuration globally available
     }),
     JwtModule.registerAsync({
-      inject:[ConfigService],
-      useFactory(config:ConfigService<Env, true>) {
-        const secret = config.get('JWT_SECRET', {infer:true});
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService<Env, true>) => {
+        const secret = config.get<string>('JWT_SECRET'); // Explicitly typed
+        if (!secret) {
+          throw new Error('JWT_SECRET is not defined in environment variables');
+        }
         return {
-          secret
+          secret,
+          signOptions: { expiresIn: '1h' },  // Optional: Set expiration time for JWT
         };
       },
     }),
     AuthenticationModule,
-BcryptModule
+    BcryptModule,
   ],
   controllers: [AppController],
   providers: [AppService],

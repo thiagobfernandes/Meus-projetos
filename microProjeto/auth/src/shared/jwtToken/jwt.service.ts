@@ -1,42 +1,40 @@
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 
+@Injectable()
 export class JWTtokenService {
-    constructor(private readonly jwtService: JwtService) {}
-    async generateToken(userId:number) {
-        return this.jwtService.sign({
-           payload:{
-            id:userId
-           },
-        
-        
-        },
-        {expiresIn:'7d'}
-    )
+    constructor(private readonly jwtService: JwtService,
+        private readonly configService: ConfigService
+    ) {}
+    generateToken(userId: number) {
+        const payload = { userId };
+        const secret = this.configService.get<string>('JWT_SECRET'); // Access secret from environment variables
+        return this.jwtService.sign(payload, { secret }); // Signing with the secret
+      }
 
-    }
-
-    async generateRefreshToken(userId:number) {
-        return this.jwtService.sign(
-            {
-                payload:{
-                    id:userId
-                }
-            },
-            {expiresIn:'7d'}
-        )
-    }
+    // async generateRefreshToken(userId:number) {
+    //     return this.jwtService.sign(
+    //         {
+    //             payload:{
+    //                 id:userId
+    //             }
+    //         },
+    //         {expiresIn:'7d'}
+    //     )
+    // }
 
     async verifytoken(token:string) {
-        return this.jwtService.verify(token)
+        return await this.jwtService.verify(token)
     }
     async validadeToken(token:string) {
-        return this.jwtService.verify(token)
+        return await this.jwtService.verify(token)
     }
     async decodeToken(token:string){
-        return this.jwtService.decode(token)
+        return await this.jwtService.decode(token)
     }
 
     async verifyAsynToken(token:string) {
-        return this.jwtService.verifyAsync(token)
+        return await this.jwtService.verifyAsync(token)
     }
 }
